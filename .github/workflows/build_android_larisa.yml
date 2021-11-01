@@ -2,7 +2,7 @@ name: Android CI
 
 on:
   push:
-    branches: [ Larisa ]
+    branches: [ main ]
   pull_request:
     branches: [ Larisa ]
 
