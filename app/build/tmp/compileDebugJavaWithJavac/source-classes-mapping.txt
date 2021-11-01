@@ -1,0 +1,6 @@
+com/example/localhub/BuildConfig.java
+ com.example.localhub.BuildConfig
+com/example/localhub/MainActivity.java
+ com.example.localhub.MainActivity
+ com.example.localhub.MainActivity$1
+ com.example.localhub.MainActivity$2
