@@ -28,3 +28,7 @@ jobs:
     - name: where is the APK 
       run: pwd
       
+    - uses: actions/upload-artifact@v2
+      with:
+          name: android-app
+          path: android-app
