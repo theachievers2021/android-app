@@ -1,4 +1,4 @@
-package com.lsuciu.social_impact;
+package com.example.localhub;
 
 import org.junit.Test;
 
