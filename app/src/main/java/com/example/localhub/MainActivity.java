@@ -36,7 +36,6 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Locale;
 
-import okhttp3.OkHttpClient;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -121,7 +120,7 @@ public class MainActivity extends AppCompatActivity{
                     //noinspection MissingPermission
                     List<String> location = getLocationName(lastKnownLocation.getLatitude(), lastKnownLocation.getLongitude());
 
-                    Intent intent = new Intent(getApplicationContext(), SecondScreen.class);
+                    Intent intent = new Intent(getApplicationContext(), ServicesScreen.class);
                     intent.putExtra("locationCityAndCounty", (Serializable) location);
                     startActivity(intent);
                 }else{
@@ -184,7 +183,8 @@ public class MainActivity extends AppCompatActivity{
             @Override
             public boolean onEditorAction(TextView textView, int i, KeyEvent keyEvent) {
                 allIds.clear();
-                Call<JsonObject> call=locationApi.getLocation(textView.getText().toString(),true,"OR","*:*");
+                Call<JsonObject> call=locationApi.getLocation(textView.getText().toString(),true,"AND","*:*");
+                Log.v("MAIN", call.request().toString());
                 call.enqueue(new Callback<JsonObject>() {
                     @Override
                     public void onResponse(Call<JsonObject> call, Response<JsonObject> response) {

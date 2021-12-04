@@ -10,8 +10,6 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.localhub.entities.LocationInfo;
-
 import java.util.List;
 
 public class AdapterSearchResult extends RecyclerView.Adapter<AdapterSearchResult.ViewHolder> {
@@ -42,7 +40,7 @@ public class AdapterSearchResult extends RecyclerView.Adapter<AdapterSearchResul
             @Override
             public void onClick(View v) {
                 //open second activity
-                Intent i = new Intent(context, SecondScreen.class);
+                Intent i = new Intent(context, ServicesScreen.class);
                 i.putExtra("locationId", locationInfo);
                 context.startActivity(i);
             }
