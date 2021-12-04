@@ -17,6 +17,12 @@
         android:theme="@style/Theme.LocalHub"
         android:usesCleartextTraffic="true">
         <activity
+            android:name=".pages.FavoritesActivity"
+            android:exported="false" />
+        <activity
+            android:name=".pages.MainActivity"
+            android:exported="false" />
+        <activity
             android:name=".pages.ListScreen"
             android:exported="false" />
         <activity

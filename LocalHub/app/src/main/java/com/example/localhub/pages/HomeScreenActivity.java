@@ -18,12 +18,14 @@ import android.location.Geocoder;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
+import android.net.Uri;
 import android.os.Bundle;
 import android.provider.Settings;
 import android.util.Log;
 import android.provider.Settings;
 import android.util.Log;
 import android.view.KeyEvent;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
@@ -32,6 +34,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.localhub.domain.CurrentLocation;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
@@ -43,6 +46,7 @@ import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.gson.JsonObject;
@@ -61,13 +65,12 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-public class HomeScreenActivity extends AppCompatActivity implements OnMapReadyCallback, LocationListener {
+public class HomeScreenActivity extends AppCompatActivity{
 
     private AutoCompleteTextView insert_place;
-    private Button search_place, current_location;
-    private LocationManager locationManager;
-    private String locationCity = "";
-    private LatLng latLngCity;
+    private Button search_place;
+    private BottomNavigationView bottomNavigationView;
+    private CurrentLocation currentLocation;
 
 
     @Override
@@ -76,78 +79,57 @@ public class HomeScreenActivity extends AppCompatActivity implements OnMapReadyC
         setContentView(R.layout.activity_home_screen);
 
         getSupportActionBar().hide();
+        currentLocation=new CurrentLocation(this);
 
 
         insert_place = findViewById(R.id.insert_place);
         search_place = findViewById(R.id.search_place);
-        current_location = findViewById(R.id.current_location);
 
+        bottomNavigationView=findViewById(R.id.bottom_navigation);
 
-        configure_inputText();
-        search_place();
-        current_location();
+        //set home selected
+        bottomNavigationView.setSelectedItemId(R.id.home);
 
+        //perform ItemSelectedListener
 
-    }
-
-    private void current_location() {
-        current_location.setOnClickListener(new View.OnClickListener() {
+        bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
-            public void onClick(View v) {
-                grantPermission();
-                checkLocationIsEnabled();
-                getLocation();
+            public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
+                switch (menuItem.getItemId()){
+                    case R.id.home:
+                        return false;
+                    case R.id.favorites:
+                        startActivity(new Intent(getApplicationContext(),FavoritesActivity.class));
+                        overridePendingTransition(0,0);
+                        finish();
+                        return true;
+                    case R.id.current_place:
+                        currentLocation.current_location();
+                        if(currentLocation.isLocationFound()) {
+                            finish();
+                            return true;
+                        }
+                        else
+                            return false;
+                    case R.id.add:
+                        Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://theachievers2021.github.io/localhub/"));
+                        startActivity(intent);
+                        return false;
 
-
+                }
+                return false;
 
             }
         });
 
 
-    }
+        configure_inputText();
+        search_place();
 
-    private void getLocation() {
-        try {
-            locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
-            locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 500, 5, (LocationListener) this);
-
-        } catch (SecurityException e) {
-            e.printStackTrace();
-        }
-    }
-
-    private void checkLocationIsEnabled() {
-        LocationManager locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
-        boolean gpsEnabled = false;
-        boolean networkEnabled = false;
-
-        try {
-            gpsEnabled = locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-        try {
-            networkEnabled = locationManager.isProviderEnabled(LocationManager.NETWORK_PROVIDER);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        if (!gpsEnabled && !networkEnabled) {
-            startActivity(new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS));
-
-        }
 
     }
 
 
-
-    private void grantPermission(){
-        if(ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)!= PackageManager.PERMISSION_GRANTED
-                && ActivityCompat.checkSelfPermission(getApplicationContext(),Manifest.permission.ACCESS_COARSE_LOCATION)!=PackageManager.PERMISSION_GRANTED){
-            ActivityCompat.requestPermissions(this,new String[]{Manifest.permission.ACCESS_FINE_LOCATION,
-                    Manifest.permission.ACCESS_BACKGROUND_LOCATION},100);
-        }
-    }
 
 
 
@@ -270,90 +252,4 @@ public class HomeScreenActivity extends AppCompatActivity implements OnMapReadyC
         });
     }
 
-    @Override
-    public void onLocationChanged(@NonNull Location location) {
-        Geocoder geocoder=new Geocoder(getApplicationContext(), Locale.getDefault());
-        try{
-            List<Address> addressList=geocoder.getFromLocation(location.getLatitude(),location.getLongitude(),1);
-            locationCity=addressList.get(0).getLocality();
-            latLngCity=new LatLng(location.getLatitude(),location.getLongitude());
-            Log.d("HUB",locationCity);
-            System.out.println(locationCity);
-            Log.d("HUB","Aixi: "+latLngCity);
-
-            //Toast.makeText(HomeScreenActivity.this, locationCity, Toast.LENGTH_SHORT).show();
-
-            Retrofit retrofit=new Retrofit.Builder()
-                    .baseUrl("http://zimbor.go.ro/solr/romania/")
-                    .addConverterFactory(GsonConverterFactory.create())
-                    .build();
-
-            LocationRepository locationApi=retrofit.create(LocationRepository.class);
-            Call<JsonObject> call=locationApi.getLocation('\"'+locationCity+'\"',true,"OR","*:*");
-            call.enqueue(new Callback<JsonObject>() {
-                @Override
-                public void onResponse(Call<JsonObject> call, Response<JsonObject> response) {
-                    if (!response.isSuccessful()) {
-                        Toast.makeText(getApplicationContext(), "Code: " + response.code(), Toast.LENGTH_SHORT).show();
-                        System.out.println("Eroare");
-                        return;
-                    } else {
-                        JsonObject data = response.body();
-
-                        JsonObject responseData = (JsonObject) data.get("response");
-                        int numLocations = responseData.getAsJsonArray("docs").size();
-                        if(numLocations==0){
-                            Toast.makeText(HomeScreenActivity.this,"Locatia nu poate fi gasita.",Toast.LENGTH_SHORT).show();
-
-                        }else {
-                            List<String> allIds = new ArrayList<>();
-
-                            for(int i=0;i<numLocations;i++) {
-                                JsonObject locationData = (JsonObject) responseData.getAsJsonArray("docs").get(i);
-                                String[] ids = String.valueOf(locationData.get("id")).split("\"");
-                                if (!allIds.contains(ids[1])) {
-                                    allIds.add(ids[1]);
-                                }
-                            }
-                                //Toast.makeText(HomeScreenActivity.this, allIds.get(0), Toast.LENGTH_SHORT).show();
-                                Intent intent = new Intent(getApplicationContext(),ListScreen.class);
-                                intent.putExtra("locationCityAndCounty", allIds.get(0));
-                                startActivity(intent);
-                            }
-
-                    }
-                }
-
-                @Override
-                public void onFailure(Call<JsonObject> call, Throwable t) {
-                    Toast.makeText(getApplicationContext(), "Something went wrong...", Toast.LENGTH_SHORT).show();
-                    System.out.println("Something went wrong...");
-                }
-            });
-
-
-        }catch (IOException e){
-            e.printStackTrace();
-        }
-    }
-
-    @Override
-    public void onMapReady(GoogleMap googleMap) {
-
-    }
-
-    @Override
-    public void onProviderEnabled(@NonNull String provider) {
-
-    }
-
-    @Override
-    public void onProviderDisabled(@NonNull String provider) {
-
-    }
-
-    @Override
-    public void onStatusChanged(String provider, int status, Bundle extras) {
-
-    }
 }

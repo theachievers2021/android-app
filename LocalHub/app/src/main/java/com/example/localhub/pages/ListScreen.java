@@ -1,16 +1,21 @@
 package com.example.localhub.pages;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.MenuItem;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.localhub.R;
+import com.example.localhub.domain.CurrentLocation;
 import com.example.localhub.domain.LocationResult;
 import com.example.localhub.repository.RetrofitApiService;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.gson.JsonObject;
 
 import java.awt.font.TextAttribute;
@@ -28,6 +33,8 @@ public class ListScreen extends AppCompatActivity {
     private Intent intent;
     private Retrofit retrofit;
     private RetrofitApiService service;
+    private BottomNavigationView bottomNavigationView;
+    private CurrentLocation currentLocation;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,6 +43,41 @@ public class ListScreen extends AppCompatActivity {
         setContentView(R.layout.activity_list_screen);
         location=findViewById(R.id.location);
         services_list=findViewById(R.id.services_list);
+        bottomNavigationView=findViewById(R.id.bottom_navigation);
+
+        currentLocation=new CurrentLocation(this);
+        bottomNavigationView.setSelectedItemId(R.id.current_place);
+        bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
+                switch (menuItem.getItemId()){
+                    case R.id.home:
+                        finish();
+                        return true;
+                    case R.id.favorites:
+                        startActivity(new Intent(getApplicationContext(),FavoritesActivity.class));
+                        overridePendingTransition(0,0);
+                        finish();
+                        return true;
+                    case R.id.current_place:
+                        currentLocation.current_location();
+                        finish();
+                        if(currentLocation.isLocationFound()){
+                            return true;
+                        }
+
+                        else
+                            return false;
+                    case R.id.add:
+                        Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://theachievers2021.github.io/localhub/"));
+                        startActivity(intent);
+                        return false;
+
+                }
+                return false;
+
+            }
+        });
 
         intent = getIntent();
         String locationStr = intent.getStringExtra("locationCityAndCounty");

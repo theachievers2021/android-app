@@ -49,5 +49,6 @@ dependencies {
 
     //for nav bar
     implementation 'com.etebarian:meow-bottom-navigation-java:1.2.0'
+    implementation 'com.google.android.material:material:1.0.0'
 
 }
