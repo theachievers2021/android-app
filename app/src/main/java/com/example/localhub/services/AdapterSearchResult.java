@@ -1,4 +1,4 @@
-package com.example.localhub;
+package com.example.localhub.services;
 
 import android.content.Context;
 import android.content.Intent;
@@ -10,7 +10,8 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.localhub.entities.LocationInfo;
+import com.example.localhub.R;
+import com.example.localhub.ListServicesScreen;
 
 import java.util.List;
 
@@ -42,7 +43,7 @@ public class AdapterSearchResult extends RecyclerView.Adapter<AdapterSearchResul
             @Override
             public void onClick(View v) {
                 //open second activity
-                Intent i = new Intent(context, SecondScreen.class);
+                Intent i = new Intent(context, ListServicesScreen.class);
                 i.putExtra("locationId", locationInfo);
                 context.startActivity(i);
             }

@@ -1,11 +1,13 @@
 package com.example.localhub.entities;
 
+
 import com.google.gson.annotations.SerializedName;
 
+import java.io.Serializable;
 import java.util.List;
 import java.util.UUID;
 
-public class LocationInfo {
+public class LocationInfo implements Serializable {
 
     @SerializedName("id")
     UUID id;
@@ -24,6 +26,16 @@ public class LocationInfo {
 
     @SerializedName("_version_")
     String version;
+
+    @SerializedName("details")
+    List<String> details;
+
+    @SerializedName("social")
+    List<String> social;
+
+    @SerializedName("gps")
+    List<String> gpsCoordinates;
+
 
 
     public UUID getId() {
@@ -73,5 +85,30 @@ public class LocationInfo {
 
     public void setContact(List<String> contact) {
         this.contact = contact;
+    }
+
+    public List<String> getDetails() {
+        return details;
+    }
+
+    public void setDetails(List<String> details) {
+        this.details = details;
+    }
+
+    public List<String> getSocial() {
+        return social;
+    }
+
+    public void setSocial(List<String> social) {
+        this.social = social;
+    }
+
+    public List<String> getGpsCoordinates() {
+       // List<Double> coordinates =
+        return gpsCoordinates;
+    }
+
+    public void setGpsCoordinates(List<String> gpsCoordinates) {
+        this.gpsCoordinates = gpsCoordinates;
     }
 }

@@ -1,3 +1,26 @@
 <resources>
     <string name="app_name">LocalHub</string>
+    <string name="title_activity_service_details_screen">ServiceDetailsScreen</string>
+    <!-- Strings used for fragments for navigation -->
+    <string name="first_fragment_label">First Fragment</string>
+    <string name="second_fragment_label">Second Fragment</string>
+    <string name="next">Next</string>
+    <string name="previous">Previous</string>
+
+    <string name="hello_first_fragment">Hello first fragment</string>
+    <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
+
+    <string name="lorem_ipsum">
+
+Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus vitae ex ac felis efficitur vehicula sit amet in nunc. Suspendisse in interdum nunc. In cursus mollis mauris, eu tristique sem. Fusce porttitor, enim ut suscipit viverra, nibh enim auctor enim, vel elementum erat mi in magna. Aenean consectetur tellus nec erat scelerisque consectetur. Nullam non augue porttitor, ornare dui vulputate, lacinia nulla. Aenean tincidunt lorem massa, id egestas velit elementum id. Sed vitae ante convallis lacus elementum sodales a eu libero. Donec luctus magna fringilla dapibus tristique. Quisque feugiat, odio ut tincidunt mattis, enim ligula rutrum mi, consequat pulvinar erat urna vel urna. Pellentesque vitae commodo nibh. Nullam dui ligula, tempor sit amet sem et, viverra faucibus metus. Vivamus condimentum feugiat augue ac aliquet. Nunc pharetra ipsum sit amet porttitor cursus.
+
+Praesent cursus feugiat magna in facilisis. Aenean a interdum nunc. Integer a aliquet sapien, quis scelerisque libero. Donec euismod at ante quis fermentum. Maecenas accumsan eleifend ipsum. Ut sit amet placerat massa. Ut faucibus semper euismod.
+
+Nullam cursus elit arcu, vitae blandit ipsum tempor sit amet. Curabitur nibh magna, volutpat at enim ac, lacinia interdum arcu. Praesent euismod gravida maximus. Morbi quam quam, ultricies eget pulvinar eu, viverra ultrices dolor. Vivamus sed libero congue, porttitor arcu quis, malesuada ligula. Duis lobortis, nisi sit amet tincidunt mollis, nibh velit tempor libero, sed commodo tellus eros sed justo. Aenean sagittis, ex a gravida aliquam, turpis neque volutpat felis, id venenatis lacus mauris sit amet dolor. Maecenas non leo eget turpis ullamcorper eleifend ut vel lacus. Sed sit amet diam lectus. Nam dignissim lectus eu elit elementum, dapibus vestibulum libero bibendum. In tincidunt sollicitudin massa id mollis. Morbi iaculis velit pharetra ipsum scelerisque vulputate. Etiam ut egestas ligula. Nunc condimentum gravida dolor ac lacinia. Mauris mollis hendrerit mauris ultrices mollis. Morbi convallis leo vitae urna elementum lobortis.
+
+Cras at pretium neque, eget consectetur mauris. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed finibus est ac bibendum bibendum. Mauris vehicula tincidunt nibh sit amet ornare. Nullam commodo nisi ac quam sodales consectetur. Duis bibendum nunc id ex maximus, ut dictum dolor cursus. Nam mollis auctor nunc ac iaculis. Integer et purus cursus, tincidunt orci vitae, scelerisque felis. Aenean egestas laoreet sodales. Nunc lobortis, nunc ut aliquet condimentum, dolor elit accumsan eros, ut sollicitudin lorem ex eget libero. Praesent consequat elementum justo, sit amet sagittis purus ultrices at. Proin vehicula scelerisque nunc, eget bibendum ligula malesuada nec.
+
+Aliquam erat volutpat. Morbi cursus, mi efficitur sagittis laoreet, enim enim porttitor ante, et ullamcorper ligula dolor at ipsum. Nullam ante augue, malesuada convallis ipsum in, sodales iaculis ligula. Vestibulum aliquam dolor sed lacus bibendum ornare. Etiam dictum consectetur augue, non varius lorem consequat nec. Vestibulum neque erat, euismod vitae sagittis sit amet, scelerisque ut felis. Vestibulum eget tellus ultrices, varius augue eu, elementum leo. Suspendisse vehicula bibendum auctor. Pellentesque sit amet quam at tellus interdum ornare. Nam venenatis nunc at enim euismod, at commodo nisi ornare. Mauris at tortor ac lorem imperdiet posuere. Quisque neque metus, egestas gravida aliquam non, viverra consequat justo. Nunc congue, eros et feugiat tristique, lectus purus finibus lectus, et sagittis lectus lacus sit amet enim. Praesent a nisl eu magna rhoncus molestie. Cras placerat felis sed est suscipit finibus. Donec eget dignissim ligula.
+    </string>
+    <string name="here_goes_the_current_location">Here goes the current location</string>
 </resources>
