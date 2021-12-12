@@ -38,6 +38,7 @@
                 android:completionThreshold="1"
                 android:gravity="center_vertical"
                 android:hint="LOCALITATE"
+                android:backgroundTint="@android:color/transparent"
                 android:padding="16dp"
                 android:textColor="@color/white"
                 android:textColorHint="@color/white" />
