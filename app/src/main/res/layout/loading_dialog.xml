@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:padding="50dp"
+    android:background="@color/blueL_500"
+    android:orientation="vertical"
+    android:id="@+id/loading_dialog">
+
+    <com.airbnb.lottie.LottieAnimationView
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:id="@+id/loading"
+        android:layout_centerInParent="true"
+        app:lottie_autoPlay="true"
+        android:elevation="5dp"
+        app:lottie_loop="true"
+        app:lottie_rawRes="@raw/loading"
+        tools:ignore="MissingConstraints" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Se cauta locatia..."
+        android:textColor="@color/white"
+        android:textSize="20dp"
+        android:layout_marginTop="30dp"
+        android:gravity="center"/>
+</LinearLayout>

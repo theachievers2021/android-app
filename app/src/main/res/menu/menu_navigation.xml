@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu
+    xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/home"
+        android:title=""
+        android:icon="@drawable/ic_home" />
+    <item
+        android:id="@+id/current_place"
+        android:title=""
+        android:icon="@drawable/localhub_pin"/>
+    <item
+        android:id="@+id/favorites"
+        android:title=""
+        android:icon="@drawable/ic_favorite"/>
+    <item
+        android:id="@+id/add"
+        android:title=""
+        android:icon="@drawable/ic_baseline_add_circle_24"/>
+
+
+</menu>
