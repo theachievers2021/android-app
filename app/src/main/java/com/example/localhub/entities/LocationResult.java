@@ -7,7 +7,6 @@ public class LocationResult {
     @SerializedName("response")
     Response response;
 
-
     public Response getResponse() {
         return response;
     }

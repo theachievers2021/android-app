@@ -9,14 +9,7 @@ import retrofit2.http.Query;
 
 public interface LocationRepository {
 
-    @GET("select?")
-    Call<JsonObject> getLocation(
-            @Query("fq") String city,
-            @Query("indent") Boolean isTrue,
-            @Query("q.op") String or,
-            @Query("q") String code);
-
-
-
+    @GET("localitate/")
+    Call<JsonObject> getLocation(@Query("nume") String locationName);
 
 }

@@ -1,7 +1,7 @@
 package com.example.localhub.repos;
 
 import com.example.localhub.entities.LocationId;
-import com.example.localhub.entities.LocationResult;
+import com.google.gson.JsonObject;
 
 import retrofit2.Call;
 import retrofit2.http.GET;
@@ -13,6 +13,6 @@ public interface RetrofitApiService {
 
 
     @GET("/api/localhub/get_info/")
-    Call<LocationResult> getLocationInfo(@Query(value = "id", encoded = true) String id);
+    Call<JsonObject> getLocationInfo(@Query("id") String id);
 
 }

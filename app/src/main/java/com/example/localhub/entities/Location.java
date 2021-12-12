@@ -55,7 +55,6 @@ public class Location {
         this.version = version;
     }
 
-
     public String getId() {
         return id;
     }
