@@ -37,7 +37,7 @@
             android:id="@+id/searchView"
             android:layout_alignParentTop="true"
             app:searchIcon="@drawable/search_icon"
-            app:defaultQueryHint="Cauta servici..."
+            app:defaultQueryHint="Cauta servicii..."
             app:iconifiedByDefault="false"
             />
         <androidx.recyclerview.widget.RecyclerView

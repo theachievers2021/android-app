@@ -13,4 +13,7 @@
     <string name="here_goes_the_current_location">Here goes the current location</string>
 
     <string name="url_localhub">https://theachievers2021.github.io/localhub/addLocation/</string>
+
+    <!-- new link: https://theachievers2021.github.io/localhub/ -->
+    <!-- old link: https://theachievers2021.github.io/localhub/addLocation/ -->
 </resources>

@@ -13,6 +13,7 @@ import android.widget.Filter;
 import android.widget.Filterable;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
@@ -193,18 +194,17 @@ public class AdapterLocation extends RecyclerView.Adapter<AdapterLocation.ViewHo
                 });
             }
 
-            if(!existDetails){
-                TextView message = createTextView(messageString);
-                linearLayout.addView(message);
-            }
-
             currentView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     showDetails = !showDetails;
 
                     if(showDetails){
-                        linearLayout.setVisibility(View.VISIBLE);
+                        if(existDetails){
+                            linearLayout.setVisibility(View.VISIBLE);
+                        }else{
+                            Toast.makeText(context, messageString, Toast.LENGTH_SHORT).show();
+                        }
                     }else{
                         linearLayout.setVisibility(View.GONE);
                     }
